@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Events</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <style>
+    .event {
+      border: 1px solid #333;
+      padding: 15px;
+      margin: 10px;
+    }
+    .details {
+      display: none;
+      margin-top: 10px;
+    }
+    .active {
+      background-color: #d1f0ff;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="event">
+  <h3>Coding Challenge</h3>
+  <p>Date: May 10</p>
+  <button class="toggle">Show Details</button>
+
+  <div class="details">
+    <p>Test your coding skills.</p>
+    <button class="register">Register</button>
+  </div>
+</div>
+
+<div class="event">
+  <h3>Web Design</h3>
+  <p>Date: May 12</p>
+  <button class="toggle">Show Details</button>
+
+  <div class="details">
+    <p>Create beautiful websites.</p>
+    <button class="register">Register</button>
+  </div>
+</div>
+
+<div class="event">
+  <h3>Quiz Competition</h3>
+  <p>Date: May 15</p>
+  <button class="toggle">Show Details</button>
+
+  <div class="details">
+    <p>Test your knowledge.</p>
+    <button class="register">Register</button>
+  </div>
+</div>
+
+<script>
+$(document).ready(function(){
+
+  $(".toggle").click(function(){
+
+    let eventDiv = $(this).parent();
+
+    // slideToggle
+    eventDiv.find(".details").slideToggle();
+
+    // change button text
+    let btn = $(this);
+    btn.text(btn.text() === "Show Details" ? "Hide Details" : "Show Details");
+
+    // highlight selected event
+    $(".event").removeClass("active");
+    eventDiv.addClass("active");
+
+    // highlight h3 using traversing
+    $("h3").css("color", "black");
+    eventDiv.find("h3").css("color", "blue");
+
+    // get event title
+    let title = eventDiv.find("h3").text();
+    alert("Event: " + title);
+  });
+
+  $(".register").click(function(){
+    let title = $(this).closest(".event").find("h3").text();
+
+    // redirect with data
+    window.location.href = "register.html?event=" + encodeURIComponent(title);
+  });
+
+});
+</script>
+
+</body>
+</html>
